@@ -7,7 +7,7 @@ app.use(express.json());
 const PORT = 3000;
 
 app.get('/ping', (_req,res) => {
-    console.log("listo jefe");
+    console.log("servidor corriendo");
     res.send("pong");
 });
 
