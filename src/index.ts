@@ -1,14 +1,23 @@
 import express from 'express';
+import { client } from './dataBase';
+const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 
-app.use(express.json());
+//middlewares
+app.use(express.json()); //middleware que trasforma la req.body a un json
+app.use(express.urlencoded({ extended:false }));
+app.use(cors())
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
-app.get('/ping', (_req,res) => {
+app.get('/ping', async (_req,res) => {
     console.log("servidor corriendo");
-    res.send("pong");
+    const result = await client.query('select * from estanque')
+    res.send(result.rows[0]);
 });
 
 
