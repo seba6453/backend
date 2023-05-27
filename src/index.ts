@@ -1,5 +1,4 @@
 import express from 'express';
-import { client } from './dataBase';
 const cors = require('cors');
 const dotenv = require('dotenv');
 
@@ -16,8 +15,7 @@ const PORT = process.env.PORT;
 
 app.get('/ping', async (_req,res) => {
     console.log("servidor corriendo");
-    const result = await client.query('select * from estanque')
-    res.send(result.rows[0]);
+    res.send("servidor corriendo");
 });
 
 
