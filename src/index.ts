@@ -1,5 +1,6 @@
 import express from 'express';
 import { getUser } from './services/userServices';
+import router from './routers/routers';
 const cors = require('cors');
 const dotenv = require('dotenv');
 
@@ -19,6 +20,8 @@ app.get('/ping', async (_req,res) => {
     console.log(await getUser("sebastian.astudillo@alumnos.ucn.cl"))
     res.send("servidor corriendo");
 });
+
+app.use('/api', router);
 
 app.listen(PORT, () => {
     console.log('server running on port:',PORT)

@@ -9,8 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUser = void 0;
+exports.getUser = exports.getUsers = void 0;
 const dataBase_1 = require("../dataBase");
+const getUsers = () => __awaiter(void 0, void 0, void 0, function* () {
+    const query = `select * from user_data ud`;
+    const result = yield dataBase_1.client.query(query);
+    if (result.rowCount > 0) {
+        const users = yield result.rows;
+        return users;
+    }
+    return undefined;
+});
+exports.getUsers = getUsers;
 const getUser = (email) => __awaiter(void 0, void 0, void 0, function* () {
     const query = `select * from user_data ud where ud.email = lower('${email}')`;
     const result = yield dataBase_1.client.query(query);

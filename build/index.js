@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const userServices_1 = require("./services/userServices");
+const routers_1 = __importDefault(require("./routers/routers"));
 const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -28,6 +29,7 @@ app.get('/ping', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(yield (0, userServices_1.getUser)("sebastian.astudillo@alumnos.ucn.cl"));
     res.send("servidor corriendo");
 }));
+app.use('/api', routers_1.default);
 app.listen(PORT, () => {
     console.log('server running on port:', PORT);
 });
