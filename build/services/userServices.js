@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUser = exports.getUsers = void 0;
+exports.deleteUser = exports.addUser = exports.getUser = exports.getUsers = void 0;
 const dataBase_1 = require("../dataBase");
 const getUsers = () => __awaiter(void 0, void 0, void 0, function* () {
-    const query = `select * from user_data ud`;
+    const query = `select * from user_data;`;
     const result = yield dataBase_1.client.query(query);
     if (result.rowCount > 0) {
         const users = yield result.rows;
@@ -21,8 +21,8 @@ const getUsers = () => __awaiter(void 0, void 0, void 0, function* () {
     return undefined;
 });
 exports.getUsers = getUsers;
-const getUser = (email) => __awaiter(void 0, void 0, void 0, function* () {
-    const query = `select * from user_data ud where ud.email = lower('${email}')`;
+const getUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = `select * from user_data as ud where ud.id=${id};`;
     const result = yield dataBase_1.client.query(query);
     if (result.rowCount > 0) {
         const userData = yield result.rows[0];
@@ -31,3 +31,24 @@ const getUser = (email) => __awaiter(void 0, void 0, void 0, function* () {
     return undefined;
 });
 exports.getUser = getUser;
+const addUser = (userNew) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = `SELECT insert_user('${userNew.name}', '${userNew.email}');`;
+    try {
+        const result = yield dataBase_1.client.query(query);
+        return result.rows[0].id;
+    }
+    catch (err) {
+        console.error(err);
+        return -1;
+    }
+});
+exports.addUser = addUser;
+const deleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = `SELECT delete_user(${id});`;
+    const result = yield dataBase_1.client.query(query);
+    if (result.rowCount > 0) {
+        return true;
+    }
+    return false;
+});
+exports.deleteUser = deleteUser;
