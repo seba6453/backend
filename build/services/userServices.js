@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.addUser = exports.getUser = exports.getUsers = void 0;
+exports.deleteUser = exports.addUser = exports.updateUser = exports.getUser = exports.getUsers = void 0;
 const dataBase_1 = require("../dataBase");
 const getUsers = () => __awaiter(void 0, void 0, void 0, function* () {
     const query = `select * from user_data;`;
@@ -31,11 +31,20 @@ const getUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return undefined;
 });
 exports.getUser = getUser;
+const updateUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = `UPDATE user_data SET name = '${user.name}', email = '${user.name}' WHERE id = ${user.id};`;
+    const result = yield dataBase_1.client.query(query);
+    if (result.rowCount > 0) {
+        return true;
+    }
+    return false;
+});
+exports.updateUser = updateUser;
 const addUser = (userNew) => __awaiter(void 0, void 0, void 0, function* () {
     const query = `SELECT insert_user('${userNew.name}', '${userNew.email}');`;
     try {
         const result = yield dataBase_1.client.query(query);
-        return result.rows[0].id;
+        return result.rows[0].insert_user;
     }
     catch (err) {
         console.error(err);
@@ -44,7 +53,7 @@ const addUser = (userNew) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.addUser = addUser;
 const deleteUser = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const query = `SELECT delete_user(${id});`;
+    const query = ` DELETE FROM user_data WHERE id = ${id};`;
     const result = yield dataBase_1.client.query(query);
     if (result.rowCount > 0) {
         return true;

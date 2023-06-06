@@ -13,21 +13,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const userServices_1 = require("../services/userServices");
+const pondServices_1 = require("../services/pondServices");
 const router = express_1.default.Router();
 router.get("/", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield (0, userServices_1.getUsers)();
-    res.status(200).send(users);
+    const ponds = yield (0, pondServices_1.getPonds)();
+    res.status(200).send(ponds);
 }));
 router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const idUser = parseInt(req.params.id);
-        const user = yield (0, userServices_1.getUser)(idUser);
-        if (user != undefined) {
-            res.status(200).send(user);
+        const idPond = parseInt(req.params.id);
+        const pond = yield (0, pondServices_1.getPond)(idPond);
+        if (pond != undefined) {
+            res.status(200).send(pond);
         }
         else {
-            res.status(404).send({ "mensaje": "Usuario no encontrado" });
+            res.status(404).send({ "mensaje": "Estanque no encontrado" });
         }
     }
     catch (_a) {
@@ -35,27 +35,23 @@ router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 }));
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const userNew = req.body;
-    const idUSer = yield (0, userServices_1.addUser)(userNew);
-    if (idUSer >= 0) {
-        res.status(201).send({ "id": idUSer });
+    const pondNew = req.body;
+    if (yield (0, pondServices_1.addPond)(pondNew)) {
+        res.status(200).send(pondNew);
     }
     else {
-        res.status(400).send({ "mensaje": "Error en la carga del usuario" });
+        res.status(404).send({ "mensaje": "Error al agregar un nuevo estanque" });
     }
 }));
 router.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = {
-            "id": parseInt(req.params.id),
-            "name": req.body.name,
-            "email": req.body.email
-        };
-        if (yield (0, userServices_1.updateUser)(user)) {
-            res.status(200).send(user);
+        const pondUpdate = req.body;
+        const id = parseInt(req.params.id);
+        if (yield (0, pondServices_1.updatePond)(id, pondUpdate)) {
+            res.status(200).send(pondUpdate);
         }
         else {
-            res.status(404).send({ "mensaje": "usuario no actualizado" });
+            res.status(404).send({ "mensaje": "Estanque no actualizado" });
         }
     }
     catch (_b) {
@@ -64,12 +60,12 @@ router.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 }));
 router.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const idUser = parseInt(req.params.id);
-        if (yield (0, userServices_1.deleteUser)(idUser)) {
-            res.status(200).send({ "mensaje": "Usuario eliminado" });
+        const idPond = parseInt(req.params.id);
+        if (yield (0, pondServices_1.deletePond)(idPond)) {
+            res.status(200).send({ "mensaje": "Estanque eliminado" });
         }
         else {
-            res.status(400).send({ "mensaje": "Error al eliminar al usuario" });
+            res.status(400).send({ "mensaje": "Error al eliminar al estanque" });
         }
     }
     catch (_c) {

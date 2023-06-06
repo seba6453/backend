@@ -8,3 +8,7 @@ export interface Pond {
     min_NTU: Number,
     max_NTU: Number
 }
+
+export type PondNew = Omit<Pond, "id" | "harvest_date">;
+
+export type PondUpdate = Omit<Pond, "id">;

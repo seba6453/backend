@@ -13,21 +13,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const userServices_1 = require("../services/userServices");
+const reportService_1 = require("../services/reportService");
 const router = express_1.default.Router();
 router.get("/", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const users = yield (0, userServices_1.getUsers)();
-    res.status(200).send(users);
+    const reports = yield (0, reportService_1.getReports)();
+    res.status(200).send(reports);
 }));
 router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const idUser = parseInt(req.params.id);
-        const user = yield (0, userServices_1.getUser)(idUser);
-        if (user != undefined) {
-            res.status(200).send(user);
+        const idReport = parseInt(req.params.id);
+        const reports = yield (0, reportService_1.getReport)(idReport);
+        if (reports != undefined) {
+            res.status(200).send(reports);
         }
         else {
-            res.status(404).send({ "mensaje": "Usuario no encontrado" });
+            res.status(404).send({ "mensaje": "Reporte no encontrado" });
         }
     }
     catch (_a) {
@@ -35,27 +35,23 @@ router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 }));
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const userNew = req.body;
-    const idUSer = yield (0, userServices_1.addUser)(userNew);
-    if (idUSer >= 0) {
-        res.status(201).send({ "id": idUSer });
+    const reportNew = req.body;
+    if (yield (0, reportService_1.addReport)(reportNew)) {
+        res.status(200).send(reportNew);
     }
     else {
-        res.status(400).send({ "mensaje": "Error en la carga del usuario" });
+        res.status(404).send({ "mensaje": "Error al agregar un nuevo Reporte" });
     }
 }));
 router.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = {
-            "id": parseInt(req.params.id),
-            "name": req.body.name,
-            "email": req.body.email
-        };
-        if (yield (0, userServices_1.updateUser)(user)) {
-            res.status(200).send(user);
+        const reportUpdate = req.body;
+        const id = parseInt(req.params.id);
+        if (yield (0, reportService_1.updateReport)(id, reportUpdate)) {
+            res.status(200).send(reportUpdate);
         }
         else {
-            res.status(404).send({ "mensaje": "usuario no actualizado" });
+            res.status(404).send({ "mensaje": "Reporte no actualizado" });
         }
     }
     catch (_b) {
@@ -64,12 +60,12 @@ router.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 }));
 router.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const idUser = parseInt(req.params.id);
-        if (yield (0, userServices_1.deleteUser)(idUser)) {
-            res.status(200).send({ "mensaje": "Usuario eliminado" });
+        const idReport = parseInt(req.params.id);
+        if (yield (0, reportService_1.deleteReport)(idReport)) {
+            res.status(200).send({ "mensaje": "Reporte eliminado" });
         }
         else {
-            res.status(400).send({ "mensaje": "Error al eliminar al usuario" });
+            res.status(400).send({ "mensaje": "Error al eliminar al Reporte" });
         }
     }
     catch (_c) {
