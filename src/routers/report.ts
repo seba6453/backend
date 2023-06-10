@@ -1,6 +1,6 @@
 import Express from "express";
 import { addReport, deleteReport, getReport, getReports, updateReport } from "../services/reportService";
-import { ReportUpdate } from "../types/report_types";
+import { ReportNew, ReportUpdate } from "../types/report_types";
 const router = Express.Router();
 
 
@@ -27,7 +27,7 @@ router.get("/:id",async (req,res) => {
 });
 
 router.post("/",async (req,res) => {
-    const reportNew: ReportUpdate = req.body;
+    const reportNew: ReportNew = req.body;
     if (await addReport(reportNew)) {
         res.status(200).send(reportNew);
     } else {

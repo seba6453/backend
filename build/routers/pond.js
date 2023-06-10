@@ -72,4 +72,19 @@ router.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(400).send({ "mensaje": "Error en el id" });
     }
 }));
+router.get("/state/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const idPond = parseInt(req.params.id);
+        const statePond = yield (0, pondServices_1.getState)(idPond);
+        if (statePond != undefined) {
+            res.status(200).send(statePond);
+        }
+        else {
+            res.status(404).send({ "mensaje": "Estanque no encontrado" });
+        }
+    }
+    catch (_d) {
+        res.status(400).send({ "mensaje": "Error en el id" });
+    }
+}));
 exports.default = router;

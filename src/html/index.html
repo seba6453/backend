@@ -26,95 +26,80 @@
         th {
             background-color: #f2f2f2;
         }
+        .json-column {
+            white-space: pre-line;
+            font-family: monospace;
+        }
+        .column-description {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <h1>Información de las Rutas de la Backend</h1>
-    
+
+    <div class="column-description">
+        <h2>Descripción de las columnas:</h2>
+        <ul>
+            <li>Ruta: representa la ruta de la API</li>
+            <li>Método: indica el método HTTP utilizado</li>
+            <li>Descripción: proporciona una breve explicación de la funcionalidad</li>
+            <li>Body: muestra un ejemplo del "body" de la solicitud en formato JSON</li>
+        </ul>
+    </div>
+
     <h2>Usuarios (user)</h2>
     <table>
         <tr>
             <th>Ruta</th>
             <th>Método</th>
             <th>Descripción</th>
+            <th>Body</th>
         </tr>
         <tr>
             <td>/user</td>
             <td>GET</td>
             <td>Obtiene todos los usuarios</td>
+            <td>-</td>
         </tr>
         <tr>
             <td>/user/:id</td>
             <td>GET</td>
             <td>Obtiene un usuario específico por ID</td>
+            <td>-</td>
         </tr>
         <tr>
             <td>/user</td>
             <td>POST</td>
             <td>Crea un nuevo usuario</td>
+            <td>
+                <div class="json-column">
+                    {
+                        "name":"ejemplo2",
+                        "email":"ejemplo2@ejemplo.ucn.cl"
+                    }
+                </div>
+            </td>
         </tr>
         <tr>
             <td>/user/:id</td>
             <td>PUT</td>
             <td>Actualiza un usuario existente por ID</td>
-        </tr>
-    </table>
-    
-    <h2>Equipos (equipment)</h2>
-    <table>
-        <tr>
-            <th>Ruta</th>
-            <th>Método</th>
-            <th>Descripción</th>
-        </tr>
-        <tr>
-            <td>/equipment</td>
-            <td>GET</td>
-            <td>Obtiene todos los equipos</td>
+            <td>
+                <div class="json-column">
+                    {
+                        "name":"ejemplo2",
+                        "email":"ejemplo2@ejemplo.ucn.cl"
+                    }
+                </div>
+            </td>
         </tr>
         <tr>
-            <td>/equipment/:id</td>
-            <td>GET</td>
-            <td>Obtiene un equipo específico por ID</td>
-        </tr>
-        <tr>
-            <td>/equipment</td>
-            <td>POST</td>
-            <td>Crea un nuevo equipo</td>
-        </tr>
-        <tr>
-            <td>/equipment/:id</td>
-            <td>PUT</td>
-            <td>Actualiza un equipo existente por ID</td>
-        </tr>
-    </table>
-    
-    <h2>Estado de Microalgas (microalgaes_status)</h2>
-    <table>
-        <tr>
-            <th>Ruta</th>
-            <th>Método</th>
-            <th>Descripción</th>
-        </tr>
-        <tr>
-            <td>/microalgaes_status</td>
-            <td>GET</td>
-            <td>Obtiene todos los estados de microalgas</td>
-        </tr>
-        <tr>
-            <td>/microalgaes_status/:id</td>
-            <td>GET</td>
-            <td>Obtiene un estado de microalgas específico por ID</td>
-        </tr>
-        <tr>
-            <td>/microalgaes_status</td>
-            <td>POST</td>
-            <td>Crea un nuevo estado de microalgas</td>
-        </tr>
-        <tr>
-            <td>/microalgaes_status/:id</td>
-            <td>PUT</td>
-            <td>Actualiza un estado de microalgas existente por ID</td>
+            <td>/user/:id</td>
+            <td>DELETE</td>
+            <td>Elimina un usuario específico por ID</td>
+            <td>-</td>
         </tr>
     </table>
     
@@ -124,26 +109,65 @@
             <th>Ruta</th>
             <th>Método</th>
             <th>Descripción</th>
+            <th>Body</th>
         </tr>
         <tr>
             <td>/pond</td>
             <td>GET</td>
             <td>Obtiene todos los estanques</td>
+            <td>-</td>
         </tr>
         <tr>
             <td>/pond/:id</td>
             <td>GET</td>
             <td>Obtiene un estanque específico por ID</td>
+            <td>-</td>
         </tr>
         <tr>
             <td>/pond</td>
             <td>POST</td>
             <td>Crea un nuevo estanque</td>
+            <td>
+                <div class="json-column">
+                    {
+                        "id_equipment": 1,
+                        "id_microalgae_state": 1,
+                        "microalgae_name": "prueba",
+                        "min_NTU": 0.1,
+                        "max_NTU": 0.2
+                    }
+                </div>
+            </td>
         </tr>
         <tr>
             <td>/pond/:id</td>
             <td>PUT</td>
             <td>Actualiza un estanque existente por ID</td>
+            <td>
+                <div class="json-column">
+                    {
+                        "id_equipment": 1,
+                        "id_microalgae_state": 1,
+                        "microalgae_name": "prueba",
+                        "inoculation_date": "2023-01-02",
+                        "harvest_date": "2023-01-04",
+                        "min_NTU": 0.1,
+                        "max_NTU": 0.2
+                    }
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>/pond/:id</td>
+            <td>DELETE</td>
+            <td>Elimina un estanque existente por ID</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>/pond/state/:id</td>
+            <td>GET</td>
+            <td>Obtiene el estado actual del estanque</td>
+            <td>-</td>
         </tr>
     </table>
     
@@ -153,26 +177,49 @@
             <th>Ruta</th>
             <th>Método</th>
             <th>Descripción</th>
+            <th>Body</th>
         </tr>
         <tr>
             <td>/report</td>
             <td>GET</td>
             <td>Obtiene todos los reportes</td>
+            <td>-</td>
         </tr>
         <tr>
             <td>/report/:id</td>
             <td>GET</td>
-            <td>Obtiene un reporte específico por ID</td>
+            <td>Obtiene los reportes específico por de un estanque, la ID solicitado es del estanque</td>
+            <td>-</td>
         </tr>
         <tr>
             <td>/report</td>
             <td>POST</td>
             <td>Crea un nuevo reporte</td>
+            <td>
+                <div class="json-column">
+                    {
+                        "pond_id": 1,
+                        "illumination": 100.5,
+                        "NTU": 4.2
+                    }
+                </div>
+            </td>
         </tr>
         <tr>
             <td>/report/:id</td>
             <td>PUT</td>
             <td>Actualiza un reporte existente por ID</td>
+            <td>
+                <div class="json-column">
+                    {
+                        "pond_id": 1,
+                        "date": "2023-01-05",
+                        "time": "09:35:00",
+                        "illumination": 100.5,
+                        "NTU": 4.2
+                    }
+                </div>
+            </td>
         </tr>
     </table>
 </body>

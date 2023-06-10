@@ -8,8 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteReport = exports.addReport = exports.updateReport = exports.getReport = exports.getReports = void 0;
+const config_1 = __importDefault(require("../config"));
 const dataBase_1 = require("../dataBase");
 const getReports = () => __awaiter(void 0, void 0, void 0, function* () {
     const query = `select * from report;`;
@@ -22,10 +26,10 @@ const getReports = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getReports = getReports;
 const getReport = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const query = `select * from report as rp where rp.id=${id};`;
+    const query = `select * from report as rp where rp.pond_id=${id};`;
     const result = yield dataBase_1.client.query(query);
     if (result.rowCount > 0) {
-        const report = yield result.rows[0];
+        const report = yield result.rows;
         return report;
     }
     return undefined;
@@ -50,7 +54,7 @@ const updateReport = (id, reportUpdate) => __awaiter(void 0, void 0, void 0, fun
 exports.updateReport = updateReport;
 const addReport = (reportNew) => __awaiter(void 0, void 0, void 0, function* () {
     const query = `INSERT INTO report (pond_id, date, time, illumination, NTU)
-    VALUES (${reportNew.pond_id}, '${reportNew.date}', '${reportNew.time}', ${reportNew.illumination}, ${reportNew.NTU});
+    VALUES (${reportNew.pond_id}, '${config_1.default.date}', '${config_1.default.time}', ${reportNew.illumination}, ${reportNew.NTU});
     
     `;
     try {

@@ -12,3 +12,12 @@ export interface Pond {
 export type PondNew = Omit<Pond, "id" | "harvest_date">;
 
 export type PondUpdate = Omit<Pond, "id">;
+
+export interface StatePond {
+    id: Number,
+    microalgae_state: String,
+    min_NTU: Number,
+    max_NTU: Number,
+    illumination: Number,
+    ntu: Number
+};

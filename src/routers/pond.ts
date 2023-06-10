@@ -1,5 +1,5 @@
 import Express from "express";
-import { addPond, deletePond, getPond, getPonds, updatePond } from "../services/pondServices";
+import { addPond, deletePond, getPond, getPonds, getState, updatePond } from "../services/pondServices";
 import { PondNew, PondUpdate } from "../types/pond_types";
 const router = Express.Router();
 
@@ -60,6 +60,20 @@ router.delete("/:id",async (req,res) => {
             res.status(200).send({"mensaje":"Estanque eliminado"});
         }else{
             res.status(400).send({"mensaje":"Error al eliminar al estanque"});
+        }
+    }catch{
+        res.status(400).send({"mensaje":"Error en el id"});
+    }
+});
+
+router.get("/state/:id", async(req,res) => {
+    try{
+        const idPond = parseInt(req.params.id);
+        const statePond = await getState(idPond);
+        if (statePond != undefined) {
+            res.status(200).send(statePond);
+        } else {
+            res.status(404).send({"mensaje":"Estanque no encontrado"});
         }
     }catch{
         res.status(400).send({"mensaje":"Error en el id"});

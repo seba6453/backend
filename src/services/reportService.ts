@@ -1,5 +1,6 @@
+import config from "../config";
 import { client } from "../dataBase";
-import { ReportUpdate, Report } from "../types/report_types";
+import { ReportUpdate, Report, ReportNew } from "../types/report_types";
 
 
 export const getReports = async (): Promise<Report[] | undefined> => {
@@ -15,11 +16,10 @@ export const getReports = async (): Promise<Report[] | undefined> => {
 }
 
 export const getReport = async (id: Number): Promise<Report[] | undefined> => {
-    const query = `select * from report as rp where rp.id=${id};`;
+    const query = `select * from report as rp where rp.pond_id=${id};`;
     const result = await client.query(query);
-
     if (result.rowCount > 0) {
-        const report = await result.rows[0];
+        const report = await result.rows;
 
         return report;
     }
@@ -43,9 +43,9 @@ export const updateReport = async (id: Number,reportUpdate: ReportUpdate) => {
     return false;
 };
 
-export const addReport = async (reportNew: ReportUpdate) => {
+export const addReport = async (reportNew: ReportNew) => {
     const query = `INSERT INTO report (pond_id, date, time, illumination, NTU)
-    VALUES (${reportNew.pond_id}, '${reportNew.date}', '${reportNew.time}', ${reportNew.illumination}, ${reportNew.NTU});
+    VALUES (${reportNew.pond_id}, '${config.date}', '${config.time}', ${reportNew.illumination}, ${reportNew.NTU});
     
     `;
     try {

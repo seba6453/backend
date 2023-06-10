@@ -7,4 +7,6 @@ export interface Report {
     NTU: Number
 }
 
+export type ReportNew = Omit<Report, "id" | "date" | "time">;
+
 export type ReportUpdate = Omit<Report, "id">;
