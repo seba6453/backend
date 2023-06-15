@@ -10,7 +10,9 @@ const app = express();
 //middlewares
 app.use(express.json()); //middleware que trasforma la req.body a un json
 app.use(express.urlencoded({ extended:false }));
-app.use(cors())
+app.use(cors({
+    origin: '*'
+}));
 
 const PORT = process.env.PORT;
 

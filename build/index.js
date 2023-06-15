@@ -21,7 +21,9 @@ const app = (0, express_1.default)();
 //middlewares
 app.use(express_1.default.json()); //middleware que trasforma la req.body a un json
 app.use(express_1.default.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors({
+    origin: '*'
+}));
 const PORT = process.env.PORT;
 app.get('/ping', (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send("servidor corriendo");
