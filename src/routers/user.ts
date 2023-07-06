@@ -7,9 +7,9 @@ import {
   updateUser,
 } from '../services/userServices'
 import { User, UserNew } from '../types/user_types'
+import { sendMail_utils } from '../utils/sendMail'
 
 const router = Express.Router()
-import { sendMail } from '../config/emailer'
 
 router.get('/', async (_req, res) => {
   const users = await getUsers()
@@ -18,8 +18,8 @@ router.get('/', async (_req, res) => {
 
 router.get('/testMail', async (_req, res) => {
   try {
-    const users = ['iangelob99@gmail.com']
-    await sendMail({ users, typeMsg: 'info' })
+    const isVal = await sendMail_utils({ typeMsg: 'error', res })
+    if (!isVal) throw new Error('error')
     res.status(200).send({ message: 'Correo enviado correctamente' })
   } catch (err) {
     res.status(400).send({ message: 'Error enviando el correo', err })

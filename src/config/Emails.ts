@@ -327,22 +327,22 @@ export const EmailInfo = `<!DOCTYPE html>
                                     >
                                       <tbody>
                                         <tr>
-                                          <td style="width: 150px">
-                                            <img
-                                              height="auto"
-                                              src="../public/Tym.png"
-                                              style="
-                                                border: 0;
-                                                display: block;
-                                                outline: none;
-                                                text-decoration: none;
-                                                height: auto;
-                                                width: 100%;
-                                                font-size: 13px;
-                                              "
-                                              width="150"
-                                            />
-                                          </td>
+                                        <td style="width: 100px">
+                                        <img
+                                          height="auto"
+                                          src="https://i.postimg.cc/R0nXLsHb/Tym.png"
+                                          style="
+                                            border: 0;
+                                            display: block;
+                                            outline: none;
+                                            text-decoration: none;
+                                            height: auto;
+                                            width: 100%;
+                                            font-size: 13px;
+                                          "
+                                          width="100"
+                                        />
+                                      </td>
                                         </tr>
                                       </tbody>
                                     </table>
@@ -1905,10 +1905,10 @@ export const EmailError = `<!DOCTYPE html>
                                     >
                                       <tbody>
                                         <tr>
-                                          <td style="width: 150px">
+                                          <td style="width: 100px">
                                             <img
                                               height="auto"
-                                              src="../public/Tym.png"
+                                              src="https://i.postimg.cc/R0nXLsHb/Tym.png"
                                               style="
                                                 border: 0;
                                                 display: block;
@@ -1918,7 +1918,7 @@ export const EmailError = `<!DOCTYPE html>
                                                 width: 100%;
                                                 font-size: 13px;
                                               "
-                                              width="150"
+                                              width="100"
                                             />
                                           </td>
                                         </tr>
@@ -3484,22 +3484,22 @@ export const EmailWarning = `<!DOCTYPE html>
                                     >
                                       <tbody>
                                         <tr>
-                                          <td style="width: 150px">
-                                            <img
-                                              height="auto"
-                                              src="../public/Tym.png"
-                                              style="
-                                                border: 0;
-                                                display: block;
-                                                outline: none;
-                                                text-decoration: none;
-                                                height: auto;
-                                                width: 100%;
-                                                font-size: 13px;
-                                              "
-                                              width="150"
-                                            />
-                                          </td>
+                                        <td style="width: 100px">
+                                        <img
+                                          height="auto"
+                                          src="https://i.postimg.cc/R0nXLsHb/Tym.png"
+                                          style="
+                                            border: 0;
+                                            display: block;
+                                            outline: none;
+                                            text-decoration: none;
+                                            height: auto;
+                                            width: 100%;
+                                            font-size: 13px;
+                                          "
+                                          width="100"
+                                        />
+                                      </td>
                                         </tr>
                                       </tbody>
                                     </table>
@@ -5163,22 +5163,22 @@ export const EmailCompleted = `<!DOCTYPE html>
                                     >
                                       <tbody>
                                         <tr>
-                                          <td style="width: 150px">
-                                            <img
-                                              height="auto"
-                                              src="../public/Tym.png"
-                                              style="
-                                                border: 0;
-                                                display: block;
-                                                outline: none;
-                                                text-decoration: none;
-                                                height: auto;
-                                                width: 100%;
-                                                font-size: 13px;
-                                              "
-                                              width="150"
-                                            />
-                                          </td>
+                                        <td style="width: 100px">
+                                        <img
+                                          height="auto"
+                                          src="https://i.postimg.cc/R0nXLsHb/Tym.png"
+                                          style="
+                                            border: 0;
+                                            display: block;
+                                            outline: none;
+                                            text-decoration: none;
+                                            height: auto;
+                                            width: 100%;
+                                            font-size: 13px;
+                                          "
+                                          width="100"
+                                        />
+                                      </td>
                                         </tr>
                                       </tbody>
                                     </table>

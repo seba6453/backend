@@ -26,33 +26,38 @@ const createTransporter = () => {
 }*/
 
 interface Props {
-  users: string[] | string
+  users: String[] | String
   typeMsg: 'error' | 'info' | 'warning' | 'completed'
 }
 
 export const sendMail = async ({ users, typeMsg }: Props) => {
   //const transporter = createTransporter()
-  let msg = 'Error TYM'
-  switch (typeMsg) {
-    case 'error':
-      msg = EmailError
-      break
-    case 'info':
-      msg = EmailInfo
-      break
-    case 'warning':
-      msg = EmailWarning
-      break
-    case 'completed':
-      msg = EmailCompleted
+  try {
+    let msg = 'Error TYM'
+    switch (typeMsg) {
+      case 'error':
+        msg = EmailError
+        break
+      case 'info':
+        msg = EmailInfo
+        break
+      case 'warning':
+        msg = EmailWarning
+        break
+      case 'completed':
+        msg = EmailCompleted
+    }
+    //test replace smtpTransport to transporter
+    const info = await smtpTransport.sendMail({
+      from: '"Angelo" <noreplytestAngelo@exa.com>',
+      to: users,
+      subject: 'Hi',
+      html: msg,
+    })
+
+    console.log('message sent', info.messageId)
+    return
+  } catch (err) {
+    console.log(err)
   }
-  //test replace smtpTransport to transporter
-  const info = await smtpTransport.sendMail({
-    from: '"Angelo" <noreplytestAngelo@exa.com>',
-    to: users,
-    subject: 'Hi',
-    html: msg,
-  })
-  console.log('message sent', info.messageId)
-  return
 }
