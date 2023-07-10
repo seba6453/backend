@@ -8,6 +8,6 @@ require("moment-timezone");
 moment_1.default.tz.setDefault('America/Santiago');
 const config = {
     date: (0, moment_1.default)().format('YYYY-MM-DD'),
-    time: (0, moment_1.default)().format('HH:mm:ss')
+    time: (0, moment_1.default)().format('HH:mm:ss'),
 };
 exports.default = config;
