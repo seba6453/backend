@@ -1,7 +1,9 @@
 export interface Equipment {
     id: Number,
-    ligth_duration: String,
-    pump_state: Boolean
+    pump_state: Boolean,
+    start_time: String,
+    end_time: String,
+    total_time?: string
 }
 
 export type EquipmentUpdate = Omit<Equipment, "id">;

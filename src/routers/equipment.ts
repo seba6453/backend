@@ -1,6 +1,6 @@
 import Express from "express";
 import { addEquipment, deleteEquipment, getEquipment, getEquipments, updateBomb, updateTime } from "../services/equipmentServices";
-import { Equipment, EquipmentNew } from "../types/equipment_types";
+import { EquipmentNew, EquipmentUpdate } from "../types/equipment_types";
 const router = Express.Router();
 
 router.get("/",async (_req,res) => {
@@ -30,22 +30,6 @@ router.post("/",async (req,res) => {
         res.status(404).send({"mensaje":"Error al agregar un nuevo equipo"});
     }
 
-});
-
-router.get("/time/:id",async (req,res) => {
-    try{
-        const idEquipment = parseInt(req.params.id);
-        const equipment: Equipment|undefined = await getEquipment(idEquipment);
-        if (equipment != undefined) {
-            console.log(equipment);
-
-            res.status(200).send(equipment);
-        } else {
-            res.status(404).send({"mensaje":"Equipo no encontrado"});
-        }
-    }catch{
-        res.status(400).send({"mensaje":"Error en el id"});
-    }
 });
 
 router.delete("/:id",async (req,res) => {
@@ -87,11 +71,11 @@ router.put("/closeBomb/:id",async (req,res) => {
     }
 });
 
-router.put("/updatetime/:id",async (req,res) => {
+router.put("/time/:id",async (req,res) => {
     try{
-        const time = req.body;
+        const timeEquip: EquipmentUpdate = req.body;
         const id = parseInt(req.params.id);
-        if (await updateTime(id,time)) {
+        if (await updateTime(id,timeEquip)) {
             res.status(200).send({"mensaje":"Tiempo actualizado"});
         } else {
             res.status(404).send({"mensaje":"Tiempo no actualizado"});
@@ -100,7 +84,5 @@ router.put("/updatetime/:id",async (req,res) => {
         res.status(400).send({"mensaje":"Error en el id"});
     }
 });
-
-
 
 export default router;

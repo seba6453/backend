@@ -222,5 +222,71 @@
             </td>
         </tr>
     </table>
+        
+    <h2>Equipo (equipment)</h2>
+    <table>
+        <tr>
+            <th>Ruta</th>
+            <th>Método</th>
+            <th>Descripción</th>
+            <th>Body</th>
+        </tr>
+        <tr>
+            <td>/equipment</td>
+            <td>GET</td>
+            <td>Obtiene todos los equipos</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>/equipment/:id</td>
+            <td>GET</td>
+            <td>Obtiene un equipo en particular, la ID solicitado es del estanque.</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>/equipment</td>
+            <td>POST</td>
+            <td>Crea un nuevo equipo</td>
+            <td>
+                <div class="json-column">
+                    {
+                        "start_time": "10:15:00",
+                        "end_time": "15:45:00"
+                    }
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>/equipment/:id</td>
+            <td>PUT</td>
+            <td>Actualiza un el tiempo de inicio y termino de un equipo existente por ID</td>
+            <td>
+                <div class="json-column">
+                    {
+                        "start_time": "10:15:00",
+                        "end_time": "15:45:00"
+                    }
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>/equipment/:id</td>
+            <td>DELETE</td>
+            <td>Elimina un equipo por id</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>/equipment/openbomb/:id</td>
+            <td>PUT</td>
+            <td>Enciende la bomba de agua del equipo por id</td>
+            <td>-</td>
+        </tr>
+        <tr>
+            <td>/equipment/closebomb/:id</td>
+            <td>PUT</td>
+            <td>Apaga la bomba de agua del equipo por id</td>
+            <td>-</td>
+        </tr>
+    </table>
 </body>
 </html>

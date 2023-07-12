@@ -14,7 +14,10 @@ export const getEquipments = async (): Promise<Equipment[] | undefined> => {
 };
 
 export const getEquipment = async (id: Number): Promise<Equipment | undefined> => {
-    const query = `select * from equipment as eq where eq.id=${id};`;
+    const query = `SELECT id, pump_state, start_time, end_time, 
+    end_time - start_time AS total_time 
+    FROM equipment where id = ${id};`;
+    
     const result = await client.query(query);
 
     if (result.rowCount > 0) {
@@ -25,21 +28,9 @@ export const getEquipment = async (id: Number): Promise<Equipment | undefined> =
     return undefined;
 };
 
-export const updateEquipment = async (id: Number,equipment: EquipmentUpdate) => {
-    const query = `UPDATE equipment
-    SET light_duration = '${equipment.ligth_duration}', pump_state = ${equipment.pump_state}
-    WHERE id = ${id};
-    `;
-    const result = await client.query(query);
-    if (result.rowCount > 0) {
-        return true;
-    }
-    return false;
-};
-
 export const addEquipment = async (equipment: EquipmentNew) => {
-    const query = `INSERT INTO equipment (light_duration, pump_state)
-    VALUES ('${equipment.ligth_duration}', false);
+    const query = `INSERT INTO equipment (start_time, end_time)
+    VALUES ('${equipment.start_time}', '${equipment.end_time}');;
     `;
     try {
         await client.query(query);
@@ -71,9 +62,11 @@ export const updateBomb = async (id: Number,bool: Boolean) => {
     return false;
 };
 
-export const updateTime = async (id: Number,time: String) => {
+export const updateTime = async (id: Number,equipmentUpdate: EquipmentUpdate) => {
     const query = `UPDATE equipment
-    SET light_duration = ${time}
+    SET pump_state = ${equipmentUpdate.pump_state},
+        hora_inicio = '${equipmentUpdate.start_time}',
+        hora_termino = '${equipmentUpdate.end_time}'
     WHERE id = ${id};
     `;
     const result = await client.query(query);
